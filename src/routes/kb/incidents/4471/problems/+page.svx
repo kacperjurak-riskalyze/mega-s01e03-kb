@@ -52,7 +52,9 @@ as a one-day move (`desk-notes.json`), but the cause table on #4471 counts them 
 - The cause comes from the tenant, its locale and its booking form (`#lib/kb/causes`), not from
   the intake tag. The tag is a guess from the reporter's browser and disagrees with the tenant
   often.
-- The reports the desk read as a one-day move go to `move` (`#lib/kb/problems`).
+- Counts are the desk's own: the cause table's, on the export as it is. The reports the desk read
+  as a one-day move stay counted under the cause they are filed under, and get the `move` row
+  and ticket of their own (`#lib/kb/problems`).
 - A few reports name no dates at all. They stay with their tenant's cause.
 
 ## Why they were merged
