@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · three problems, not one'
 owner: Kacper Jurak
-status: open
+status: closed
 reviewed: 2026-11-02
 signature: Kacper Jurak
 ---
@@ -22,6 +22,8 @@ signature: Kacper Jurak
 [#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. Read report by report, it
 holds three problems. The queued parser fix closes only the first one. Each problem now has its
 own ticket.
+
+The desk has finished its work on #4471, so the three tickets are closed with this page.
 
 <ProblemTable ticket={4471} {issues} />
 
