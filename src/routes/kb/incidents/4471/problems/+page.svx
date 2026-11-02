@@ -1,0 +1,61 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: Kacper Jurak
+status: open
+reviewed: 2026-11-02
+signature: Kacper Jurak
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const issues = {};
+</script>
+
+[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. Read report by report, it
+holds three problems. The queued parser fix closes only the first one. Each problem now has its
+own ticket.
+
+<ProblemTable ticket={4471} {issues} />
+
+<Callout kind="warn">
+Shipping the parser fix and closing #4471 would leave the other two problems with no ticket.
+</Callout>
+
+## The three problems
+
+**`parser`: the shared parser reads day-first dates month first.** A day-first tenant books
+7 April and the invite says 4 July. The reports that name two dates name a day and a month
+swapped. Most of #4471 is this.
+
+**`hint`: booking-v3 prints an `MM/DD/YYYY` hint to day-first tenants.** Their people type what
+the hint tells them, month first, and the form reads it the tenant's way, day first. The dates come
+out swapped too, so it looks like `parser`, but the parser fix does not touch it: the form and its
+hint need their own fix. It shows only through the form channel at tenants that run booking-v3.
+
+**`move`: the invite moves by one day.** No month is flipped: the 12 May invite shows 11 May,
+a client in Lisbon gets Tuesday while one in Toronto gets Monday, one invite arrived before the
+booking was made. That points at time zones, not at date order. The desk had already read these
+as a one-day move (`desk-notes.json`), but the cause table on #4471 counts them under `parser`.
+
+## How the reports were placed
+
+- One id is one report. The ticket export comes in overlapping pages, so some rows appear twice;
+  the counts above drop the repeats.
+- The cause comes from the tenant, its locale and its booking form (`#lib/kb/causes`), not from
+  the intake tag. The tag is a guess from the reporter's browser and disagrees with the tenant
+  often.
+- The reports the desk read as a one-day move go to `move` (`#lib/kb/problems`).
+- A few reports name no dates at all. They stay with their tenant's cause.
+
+## Why they were merged
+
+All three came in under the same subject lines, and [decision 0001](/kb/decisions/0001-dedupe-by-subject)
+merges on subject alone. The [triage page](/kb/triage/dedupe) says "when you are unsure, merge".
+Here that hid two problems inside a ticket marked known. A new decision record could replace
+0001 with a rule that also checks the cause; this page does not change it.
+
+<RenderStamp {signature} />
