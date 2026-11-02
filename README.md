@@ -34,3 +34,8 @@ Support desk. Decision records: whoever signed them.
 ---
 
 Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
+
+## Build
+
+`npm install`, then `npm run build` renders every page to `build/`. The rendered #4471 problems
+page, as the desk sees it, is kept in `rendered/kb/incidents/4471/problems.html`.

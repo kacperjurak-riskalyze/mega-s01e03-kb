@@ -12,7 +12,11 @@ signature: Kacper Jurak
   import Callout from '#lib/kb/Callout.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 
-  const issues = {};
+  const issues = {
+    parser: 'https://github.com/kacperjurak-riskalyze/mega-s01e03-kb/issues/1',
+    hint: 'https://github.com/kacperjurak-riskalyze/mega-s01e03-kb/issues/2',
+    move: 'https://github.com/kacperjurak-riskalyze/mega-s01e03-kb/issues/3',
+  };
 </script>
 
 [#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. Read report by report, it
